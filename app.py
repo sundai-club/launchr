@@ -1,59 +1,28 @@
 import streamlit as st
 
-def personas(input_text):
-    # Placeholder for actual personas function
-    return {
-        "agents": [
-            {
-                "title": "Sales Manager",
-                "persona": "Experienced sales professional managing a team of 10",
-            },
-            {
-                "title": "Sales Representative",
-                "persona": "Entry-level sales person focused on outbound calls",
-            },
-        ]
-    }
-
-
-def pain_points(title, persona):
-    # Placeholder for actual pain points function
-    return [
-        "Challenge understanding customer needs",
-        "Difficulty tracking sales pipeline",
-    ]
-
-
-def generate_summary(agents_with_pain_points):
-    # Placeholder for actual summary function
-    return "Summary of key personas and their main pain points..."
+from launchr.interview import generate_interview
+from launchr.personas import generate_personas
+from launchr.summarize import generate_summary
 
 
 def main():
-    st.title("Persona Analysis Tool")
+    st.title("Idea Analysis Tool")
 
-    user_input = st.text_area("Enter your business context:", height=150)
+    idea = st.text_area("Enter your idea:", height=150)
 
     if st.button("Analyze"):
-        if user_input:
-            # Get personas
-            personas_result = personas(user_input)
+        if idea:
+            personas_result = generate_personas(idea)
 
-            # Add pain points for each persona
-            agents_with_pain_points = []
-            for agent in personas_result["agents"]:
-                agent_data = agent.copy()
-                agent_data["pain_points"] = pain_points(
-                    agent["title"], agent["persona"]
-                )
-                agents_with_pain_points.append(agent_data)
+            interviews = []
+            for persona in personas_result.personas:
+                interview = generate_interview(idea, persona)
+                interviews.append(interview)
 
-            # Generate and display summary
-            summary = generate_summary(agents_with_pain_points)
+            summary = generate_summary(idea, interviews)
 
-            # Display results
             st.subheader("Generated Personas and Pain Points")
-            st.json(agents_with_pain_points)
+            st.json(interviews)
 
             st.subheader("Summary")
             st.write(summary)
