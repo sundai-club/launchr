@@ -1,0 +1,23 @@
+[project]
+name = "launchr"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Sean Daly", email = "the_sean_c@fastmail.com"},
+]
+dependencies = [
+    "streamlit>=1.39.0",
+    "langchain>=0.3.4",
+    "langchain-openai>=0.2.3",
+]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
