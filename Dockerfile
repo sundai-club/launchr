@@ -1,8 +1,13 @@
 FROM python:3.12-slim
 WORKDIR /app
-COPY pyproject.toml pdm.lock .
-RUN pip install pdm && pdm install --prod
+
+RUN pip install pdm
+RUN python -m venv .venv
+
 COPY . .
+
+RUN pdm install --prod
+
 EXPOSE 8501
 ENV PYTHONUNBUFFERED=1
-CMD ["streamlit", "run", "app.py"]
+CMD ["pdm", "run", "streamlit", "run", "app.py"]
