@@ -11,11 +11,12 @@ class PersonaList(BaseModel):
     personas: list[Persona]
 
 
-def generate_personas(idea: str) -> PersonaList:
+def generate_personas(idea: str, sample_personas: str) -> PersonaList:
     """Generate personas from input text.
 
     Args:
         idea: The business idea or context to generate personas from.
+        sample_personas: A string of sample personas to use as a starting point.
 
     Returns:
         A PersonaList object containing the business idea and a list of Persona objects.
@@ -30,7 +31,7 @@ def generate_personas(idea: str) -> PersonaList:
             )
     """
     dummy_return = PersonaList(
-        idea="Dummy Idea",
+        idea=idea,
         personas=[
             Persona(
                 title="Sales Manager",
