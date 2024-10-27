@@ -1,6 +1,5 @@
 import streamlit as st
 
-
 def personas(input_text):
     # Placeholder for actual personas function
     return {
