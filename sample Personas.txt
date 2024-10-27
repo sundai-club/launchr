@@ -1,0 +1,49 @@
+{
+    "response": [
+        {
+            "title": "Modern Bourgeoisie",
+            "persona": "Ambitious, educated, and family-oriented professionals focused on stability and social status",
+            "pain_points": [
+                "Balancing career growth with family commitments",
+                "Concerned about maintaining social status and financial stability",
+                "Limited time for personal pursuits due to career and family responsibilities"
+            ]
+        },
+        {
+            "title": "Upwardly Mobile",
+            "persona": "Young professionals, often urban, who value career progression and material success",
+            "pain_points": [
+                "Difficulty affording the lifestyle they aspire to due to high living costs",
+                "Stress from balancing work demands with personal aspirations",
+                "Challenges navigating career advancement in a competitive environment"
+            ]
+        },
+        {
+            "title": "Post-Materialists",
+            "persona": "Environmentally and socially conscious individuals prioritizing personal growth over material gain",
+            "pain_points": [
+                "Finding brands that align with their ethical values and sustainable practices",
+                "Struggling to influence social or environmental change within their community",
+                "Desire for unique experiences often clashes with budget or availability"
+            ]
+        },
+        {
+            "title": "Cosmopolitans",
+            "persona": "Global-minded individuals who appreciate diversity, culture, and innovation",
+            "pain_points": [
+                "Struggle to find products that cater to their diverse, multicultural interests",
+                "Concerns about inclusivity and representation in brands they engage with",
+                "Limited access to global or niche brands in their local market"
+            ]
+        },
+        {
+            "title": "Convenience-Oriented",
+            "persona": "Busy individuals prioritizing practicality, ease of use, and accessible options in daily life",
+            "pain_points": [
+                "Finding affordable and high-quality convenience products",
+                "Time constraints make it challenging to explore new or unique products",
+                "Frustration with complex purchasing processes or lack of easy-to-use options"
+            ]
+        }
+    ]
+}
