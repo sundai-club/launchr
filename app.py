@@ -5,8 +5,8 @@ from icecream import ic
 
 from launchr.interview import generate_interview
 from launchr.personas import generate_personas
-from launchr.questions import generate_questions
 from launchr.summarize import generate_idea_hypothesis, generate_overall_summary
+from launchr.utils import strip_markdown_tags
 
 
 def main():
@@ -19,48 +19,60 @@ def main():
 
     ic(idea)
 
-    if "hypothesis" not in locals():
+    if "hypothesis" not in st.session_state:
+        st.session_state.hypothesis = ""
         hypothesis = ""
+    else:
+        hypothesis = st.session_state.hypothesis
 
     if st.button("Generate Idea Hypothesis"):
         if idea:
-            hypothesis = generate_idea_hypothesis(idea)
-            st.write(hypothesis)
+            st.session_state.hypothesis = generate_idea_hypothesis(idea)
+            hypothesis = st.session_state.hypothesis
+        else:
+            hypothesis = ""
 
-    idea += "\n\n" + hypothesis
+    st.write(hypothesis)
+
+    idea_hypothesis = idea + "\n\n" + hypothesis
+
+    placeholder_personas = dedent("""
+        - Sales Agent, 35, Male, New York, Loves the challenge of closing deals, Enjoys travel, Enjoys golf, Enjoys skiing
+        - Marketing Agent, 28, Female, San Francisco, Loves the challenge of creating engaging content, Enjoys yoga, Enjoys hiking, Enjoys meditation
+        - Customer Support Agent, 42, Male, Chicago, Loves the challenge of helping customers, Enjoys reading, Enjoys biking, Enjoys cooking
+        """).strip()
+    sample_personas = st.text_area(
+        "(Optional) Enter some sample personas:",
+        height=150,
+        placeholder=placeholder_personas,
+    )
 
     if hypothesis:
-        placeholder_personas = dedent("""
-            - Sales Agent, 35, Male, New York, Loves the challenge of closing deals, Enjoys travel, Enjoys golf, Enjoys skiing
-            - Marketing Agent, 28, Female, San Francisco, Loves the challenge of creating engaging content, Enjoys yoga, Enjoys hiking, Enjoys meditation
-            - Customer Support Agent, 42, Male, Chicago, Loves the challenge of helping customers, Enjoys reading, Enjoys biking, Enjoys cooking
-            """).strip()
-        sample_personas = st.text_area(
-            "(Optional) Enter some sample personas:",
-            height=150,
-            placeholder=placeholder_personas,
-        )
-
         if st.button("Analyze"):
             if idea:
                 personas_result = generate_personas(idea, sample_personas)
-                st.write(personas_result)
+                ic(personas_result)
 
-                questions_result = generate_questions(personas_result)
-                st.write(questions_result)
+                with st.expander("Generated Personas"):
+                    st.json(personas_result)
+
+                # TODO: make an answers generator
+                # questions_result = generate_questions(personas_result)
+                # ic(questions_result)
 
                 interviews = []
                 for persona in personas_result.personas:
                     interview = generate_interview(idea, persona)
                     interviews.append(interview)
 
+                with st.expander("Generated Personas and Pain Points"):
+                    st.json(interviews)
+
                 summary = generate_overall_summary(idea, interviews)
-
+                ic(summary)
                 st.subheader("Generated Personas and Pain Points")
-                st.json(interviews)
 
-                st.subheader("Summary")
-                st.write(summary)
+                st.markdown(strip_markdown_tags(summary).strip())
             else:
                 st.warning("Please enter some business context first.")
 

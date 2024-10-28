@@ -3,7 +3,7 @@ from textwrap import dedent
 from langchain_core.messages import HumanMessage, SystemMessage
 from pydantic import BaseModel, Field
 
-from launchr.llm import GPT4o
+from launchr.llm import default_llm
 from launchr.personas import PersonaList
 
 
@@ -11,7 +11,7 @@ class QuestionsList(BaseModel):
     questions: list[str] = Field(description="A list of questions")
 
 
-llm = GPT4o()
+llm = default_llm
 
 
 def generate_questions(personas: PersonaList, num_questions: int = 10) -> list[str]:

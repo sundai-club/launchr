@@ -9,7 +9,7 @@ How does it work? input user case > generate AI persona's > syntheise pain point
 
 Run streamlit locally:
 
-Install dependencies with pdm (`brew install pdm` to install pdm on mac):
+Install dependencies with pdm (`brew install pdm` to install pdm on mac, `pip install --user pdm` on windows):
 
 ```bash
 pdm install
@@ -51,9 +51,11 @@ I'm (Sean) thinking something like this:
 Age suggesting password:
 
 Adapt the below code so that it is outcommented:
-###  SET PASSWORD   ##################################
+
+### SET PASSWORD
+
 def check_password():
-    """Returns True if the user had the correct password."""
+"""Returns True if the user had the correct password."""
 
     def password_entered():
         """Checks whether a password entered by the user is correct."""
@@ -75,6 +77,5 @@ def check_password():
         st.error("😕 Password incorrect")
     return False
 
-
 if not check_password():
-    st.stop()  # Do not continue if check_password is not True.
+st.stop() # Do not continue if check_password is not True.
