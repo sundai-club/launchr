@@ -31,7 +31,7 @@ def generate_questions(personas: PersonaList, num_questions: int = 10) -> list[s
 
         Example:
         [
-            "What are the biggest pain points you face in your current role?", # augment the questions into: "When was this a problem for you? Tell me more about that."
+            "What are the biggest pain points you face in your current role?", # augment the questions into: "When was this a problem for you? Tell me more about that." ACTION
             "What are the biggest pain points you face in your current role?",
             "What are the biggest pain points you face in your current role?",
         ]
